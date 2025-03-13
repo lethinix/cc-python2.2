@@ -1,0 +1,61 @@
+import turtle
+
+
+screen = turtle.Screen()
+screen.bgcolor("white")
+screen.title("Plaid Pattern")
+
+# turtle
+pen = turtle.Turtle()
+pen.speed(0)  # Fastest speed
+pen.pensize(1)
+
+# drawing rectangles
+def draw_rectangle(x, y, width, height, color):
+    pen.penup()
+    pen.goto(x, y)
+    pen.pendown()
+    pen.fillcolor(color)
+    pen.begin_fill()
+    for _ in range(2):
+        pen.forward(width)
+        pen.right(90)
+        pen.forward(height)
+        pen.right(90)
+    pen.end_fill()
+
+# plaid patter
+def draw_plaid():
+    # background
+    draw_rectangle(-200, 200, 400, 400, "#FFFFE0")  # Light yellow
+    
+    # vertical stripes
+    vertical_colors = ["#556B2F", "#8B0000", "#000000"]  # Earthy green, deep red, black
+    vertical_widths = [20, 15, 10]  # Varying widths
+    vertical_spaces = [10, 15, 20]  # Varying spaces
+    x = -200
+    while x < 200:  # within the yellow square
+        for color, width, space in zip(vertical_colors, vertical_widths, vertical_spaces):
+            if x + width > 200:  # Ensure the stripe doesn't exceed the right boundary
+                width = 200 - x
+            draw_rectangle(x, 200, width, 400, color)
+            x += width + space  #space between stripes
+    
+    # horizontal stripes
+    horizontal_colors = ["#556B2F", "#8B0000", "#000000"]  
+    horizontal_widths = [15, 10, 5]  # different widths
+    horizontal_spaces = [10, 15, 20]  # different spaces
+    y = 200
+    while y > -200:  # within the yellow square
+        for color, width, space in zip(horizontal_colors, horizontal_widths, horizontal_spaces):
+            if y - width < -200:  
+                width = y + 200
+            draw_rectangle(-200, y, 400, width, color)
+            y -= width + space  
+
+# draw plaid pattern
+draw_plaid()
+
+# Hide the turtle and finish
+#pen.hideturtle()
+turtle.done()
