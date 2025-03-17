@@ -4,4 +4,4 @@ to enhance the spaceship game, i added a twinkling stars background and some noi
 
 ![picture of game](/assets/pic.png)
 
-[link to code]()
+[link to code](https://github.com/lethinix/cc-python2.2/blob/main/pygame/assignment.py)
