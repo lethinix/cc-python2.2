@@ -1,0 +1,33 @@
+Table Name,OZONE
+Table Description,2024
+Number of Records,2025-03-03
+Last Table Update,2025-02-28
+File Date,828312
+Note 1,Data having a QA_CODE of less than 3 is preliminary and subject to change.
+Data Codes Contained in File:
+COLUMN_NAME,CODE,DESCRIPTION,VALIDITY
+OZONE_F,<,Missing < 25% of hourly sampling period,Invalid
+OZONE_F,B,Field instrument channel down for > 75% of hourly sampling period,Valid
+OZONE_F,C,Invalid data collected during field calibration of instrument,Valid
+OZONE_F,D,Field instrument channel down for 25% to 75% of hourly sampling period,Valid
+OZONE_F,E,Exceptional event designation requested by state agency,Invalid
+OZONE_F,F,Field instrument power failure,Valid
+OZONE_F,H,Invalid reading - related to instrument malfunction,Valid
+OZONE_F,I,Invalid reading - Suspect data,Valid
+OZONE_F,J,Invalid reading - related to critical criteria failures,Valid
+OZONE_F,K,Non-nominal flow value identified during automated screening,Invalid
+OZONE_F,M,Field data missing,Valid
+OZONE_F,NULL,Valid data,Invalid
+OZONE_F,P,Potential problem identified during automated screening requiring further investigation,Valid
+OZONE_F,S,Field instrument out of DQO at time of 2nd calibration,Invalid
+OZONE_F,T,Third Party Audit,Valid
+OZONE_F,Y,QC control points (zero/span),Valid
+OZONE_F,^,Alarm high -- ozone > 120,Invalid
+OZONE_F,_,Field reading less than zero,Invalid
+QA_CODE,0,Level 0 validated data,
+QA_CODE,1,Level 1 validated data,
+QA_CODE,1X,Level 1 data that are suspect based on manual screening.  Data should be omitted from any statistical analyses.,
+QA_CODE,2,Level 2 validated data,
+QA_CODE,3,Level 3 validated data,
+QA_CODE,GS,Government shutdown period,
+QA_CODE,X,Record not obtained via daily polling; placeholder used,

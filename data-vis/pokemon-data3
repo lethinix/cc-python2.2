@@ -1,0 +1,18 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns 
+
+df = pd.read_csv("pokemon.csv")
+
+selected_types = ["Fire", "Water", "Grass", "Electric"]
+filtered_df = df[df["Type 1"].isin(selected_types)]
+types_palette={"Fire": "#FF4500", "Water": "#1E90FF", "Grass": "#32CD32", "Electric": "#FFD700"}
+
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x="Attack", y="Defense", hue="Type 1", data=filtered_df, palette=types_palette)
+
+plt.title("Attack vs. Defense of Selected Pokémon Types")
+plt.xlabel("Attack")
+plt.ylabel("Defense")
+plt.legend(title="Type 1")
+plt.show()
