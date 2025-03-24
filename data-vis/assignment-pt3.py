@@ -24,19 +24,19 @@ ozone_min = top_ozone["OZONE"].min()
 ozone_max = top_ozone["OZONE"].max()
 top_ozone["NORM_SIZE"] = 5 + 15 * ((top_ozone["OZONE"] - ozone_min) / (ozone_max - ozone_min))
 
-# Add scatter plot (PROPERLY SCALED)
+# Add scatter plot (with white borders for visibility)
 fig.add_trace(
     go.Scatter(
         x=top_ozone.index,
         y=top_ozone["ELEVATION"],
-        mode='markers',  # Fixed typo: was 'markers'
+        mode='markers',
         marker=dict(
             size=top_ozone["NORM_SIZE"],
             color=top_ozone["OZONE"],
             colorscale="Viridis",
             showscale=True,
             opacity=0.8,
-            line=dict(width=1, color='DarkSlateGrey')
+            line=dict(width=1, color='white')  # White borders for contrast
         ),
         hovertext=top_ozone["HOVER_TEXT"],
         hoverinfo="text",
@@ -44,51 +44,67 @@ fig.add_trace(
     )
 )
 
-# Add subtle trend line
+# Add subtle trend line (now more visible)
 z = np.polyfit(top_ozone.index, top_ozone["ELEVATION"], 1)
 fig.add_trace(
     go.Scatter(
         x=top_ozone.index,
         y=np.poly1d(z)(top_ozone.index),
         mode='lines',
-        line=dict(color='red', dash='dash', width=1.5),
-        opacity=0.3,
+        line=dict(color='cyan', dash='dash', width=2),  # Cyan for better visibility
+        opacity=0.5,
         name='Trend Line'
     )
 )
 
-# Clean layout
+# Dark theme layout
 fig.update_layout(
     title="<b>Top 30 Ozone Levels vs. Elevation</b>",
+    title_font=dict(color='white', size=20),
     xaxis=dict(
         title="Observation Index",
+        title_font=dict(color='white'),
         tickvals=top_ozone.index,
-        ticktext=top_ozone["SITE_ID"].str[:4] + "...",
-        tickangle=45
+        ticktext=top_ozone["SITE_ID"],  # Full site IDs
+        tickangle=45,
+        tickfont=dict(color='white'),
+        gridcolor='rgba(100,100,100,0.5)',
+        zerolinecolor='rgba(100,100,100,0.5)'
     ),
-    yaxis=dict(title="Elevation (m)"),
-    hovermode="closest",
-    width=1000,
-    height=600,
+    yaxis=dict(
+        title="Elevation (m)",
+        title_font=dict(color='white'),
+        tickfont=dict(color='white'),
+        gridcolor='rgba(100,100,100,0.5)',
+        zerolinecolor='rgba(100,100,100,0.5)'
+    ),
     legend=dict(
         x=0.02,
         y=0.98,
         xanchor='left',
-        bgcolor='rgba(255,255,255,0.7)',
-        font=dict(size=10)
+        bgcolor='rgba(30,30,30,0.8)',  # Darker semi-transparent
+        bordercolor='lightgray',
+        font=dict(color='white', size=12)
     ),
     coloraxis=dict(
         colorbar=dict(
-            x=1.1,
             title="Ozone (ppm)",
+            title_font=dict(color='white'),
+            tickfont=dict(color='white'),
+            x=1.1,
             thickness=15
         )
     ),
-    margin=dict(l=50, r=200, t=80, b=100),
-    plot_bgcolor='white'
+    plot_bgcolor='black',
+    paper_bgcolor='black',
+    font=dict(color='white'),
+    width=1200,  # Slightly wider for full IDs
+    height=700,
+    margin=dict(l=80, r=150, t=100, b=100)
 )
 
-fig.update_xaxes(showgrid=True, gridcolor='lightgray')
-fig.update_yaxes(showgrid=True, gridcolor='lightgray')
+# Custom grid lines
+fig.update_xaxes(showgrid=True, gridwidth=0.5)
+fig.update_yaxes(showgrid=True, gridwidth=0.5)
 
 fig.show()
